@@ -1,0 +1,49 @@
+﻿<Page x:Class="WpfApp17.UserBasicWindow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp17"
+      mc:Ignorable="d" 
+      d:DesignHeight="1024" d:DesignWidth="1720" Background="Gray"
+      Title="UserBasicWindow">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <TextBlock x:Name="UserNameTextBlock" FontWeight="Bold" Foreground="DarkGreen"/>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+                    <TextBox x:Name="SearchTextBox" Width="200" Height="25" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <Button Content="Поиск" Click="SearchButton_Click" Height="25"/>
+                    <ComboBox x:Name="Test" Width="50" Height="15" Margin="40,0,0,0" SelectionChanged="ComboBox_SelectionChanged">
+                        <ComboBoxItem>
+                            1
+                        </ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+                <ListView Name="ImageListView">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}">
+                            </WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding WebformatURL}" Width="200" Height="200"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                   
+                </ListView>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
