@@ -35,16 +35,16 @@ namespace WpfApp17
                 {
                     using (var client = new HttpClient())
                     {
-                        // Создайте строку запроса с учетом выбранных параметров
+                        
                         string queryString = $"{BASEURL}?key={APIKEY}&q={searchQuery}&per_page=100&image_type=photo";
 
-                        // Добавьте выбранные фильтры к запросу
+                        
                         if (!string.IsNullOrEmpty(x) && x.ToLower() != "all")
                         {
-                            queryString += $"&colors={x.ToLower()}"; // x - выбранный цвет
+                            queryString += $"&colors={x.ToLower()}"; 
                         }
 
-                        // Добавьте остальные фильтры, если они выбраны
+                        
                         if (CategoryComboBox.SelectedItem != null && ((ComboBoxItem)CategoryComboBox.SelectedItem).Content.ToString().ToLower() != "all")
                         {
                             string selectedCategory = ((ComboBoxItem)CategoryComboBox.SelectedItem).Content.ToString();
@@ -69,7 +69,7 @@ namespace WpfApp17
                             queryString += $"&order={selectedOrder.ToLower()}";
                         }
 
-                        // Отправьте запрос
+                      
                         var response = await client.GetStringAsync(queryString);
                         var pixabayResponse = JsonConvert.DeserializeObject<PixabayResponse>(response);
 
@@ -113,10 +113,10 @@ namespace WpfApp17
             {
                 string selectedText = ((ComboBoxItem)comboBox.SelectedItem).Content.ToString();
 
-                // Обновим значение x
+                
                 x = selectedText;
 
-                // Выполним поиск с учетом нового фильтра
+                
                 SearchButton_Click(sender, e);
             }
         }
