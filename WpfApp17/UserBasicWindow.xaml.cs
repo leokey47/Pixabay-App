@@ -1,72 +1,35 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using WpfApp17.Model;
 using WpfApp17.View;
 
 namespace WpfApp17
 {
-    /// <summary>
-    /// Логика взаимодействия для UserBasicWindow.xaml
-    /// </summary>
     public partial class UserBasicWindow : Page
     {
         private const string APIKEY = "41778547-57ecc5a39ede505afd8e1cafc";
         private const string BASEURL = "https://pixabay.com/api/";
         public string x;
+        private USERS currentUser;
 
         public UserBasicWindow(USERS currentUser)
         {
             InitializeComponent();
+            this.currentUser = currentUser;
             LoadImages();
-            //NavigationService.Navigate(new SignIn());
+
+            Console.WriteLine($"UserBasicWindow loaded for user: {currentUser.Login}");
         }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
-            //SwitchToLoginTab();
             NavigationService.Navigate(new SignIn());
-
         }
 
-        //private void SwitchToLoginTab()
-        //{
-        //    for (int i = 0; i < TabControl.Items.Count; i++)
-        //    {
-        //        if ((TabControl.Items[i] as TabItem)?.Header.ToString() == "Вход")
-        //        {
-        //            TabControl.SelectedIndex = i;
-        //            break;
-        //        }
-        //    }
-        //}
-
-        //private void SwitchToLoginTab()
-        //{
-        //    for (int i = 0; i < TabControl.Items.Count; i++)
-        //    {
-        //        if ((TabControl.Items[i] as TabItem)?.Header.ToString() == "Вход")
-        //        {
-        //            TabControl.SelectedIndex = i;
-        //            break;
-        //        }
-        //    }
-        //}
-
-        //private void SwitchToMainMenuTab()
-        //{
-        //    for (int i = 0; i < TabControl.Items.Count; i++)
-        //    {
-        //        if ((TabControl.Items[i] as TabItem)?.Header.ToString() == "Главное меню")
-        //        {
-        //            TabControl.SelectedIndex = i;
-        //            break;
-        //        }
-        //    }
-        //}
         private async void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             string searchQuery = SearchTextBox.Text.Trim();
@@ -77,8 +40,42 @@ namespace WpfApp17
                 {
                     using (var client = new HttpClient())
                     {
-                       
-                        var response = await client.GetStringAsync($"{BASEURL}?key={APIKEY}&q={searchQuery}&per_page=100&image_type=photo");
+                        
+                        string queryString = $"{BASEURL}?key={APIKEY}&q={searchQuery}&per_page=100&image_type=photo";
+
+                        
+                        if (!string.IsNullOrEmpty(x) && x.ToLower() != "all")
+                        {
+                            queryString += $"&colors={x.ToLower()}"; 
+                        }
+
+                        
+                        if (CategoryComboBox.SelectedItem != null && ((ComboBoxItem)CategoryComboBox.SelectedItem).Content.ToString().ToLower() != "all")
+                        {
+                            string selectedCategory = ((ComboBoxItem)CategoryComboBox.SelectedItem).Content.ToString();
+                            queryString += $"&category={selectedCategory.ToLower()}";
+                        }
+
+                        if (OrientationComboBox.SelectedItem != null && ((ComboBoxItem)OrientationComboBox.SelectedItem).Content.ToString().ToLower() != "all")
+                        {
+                            string selectedOrientation = ((ComboBoxItem)OrientationComboBox.SelectedItem).Content.ToString();
+                            queryString += $"&orientation={selectedOrientation.ToLower()}";
+                        }
+
+                        if (ColorComboBox.SelectedItem != null && ((ComboBoxItem)ColorComboBox.SelectedItem).Content.ToString().ToLower() != "all")
+                        {
+                            string selectedColor = ((ComboBoxItem)ColorComboBox.SelectedItem).Content.ToString();
+                            queryString += $"&colors={selectedColor.ToLower()}";
+                        }
+
+                        if (OrderComboBox.SelectedItem != null)
+                        {
+                            string selectedOrder = ((ComboBoxItem)OrderComboBox.SelectedItem).Content.ToString();
+                            queryString += $"&order={selectedOrder.ToLower()}";
+                        }
+
+                      
+                        var response = await client.GetStringAsync(queryString);
                         var pixabayResponse = JsonConvert.DeserializeObject<PixabayResponse>(response);
 
                         ImageListView.ItemsSource = pixabayResponse.Hits;
@@ -94,6 +91,7 @@ namespace WpfApp17
                 MessageBox.Show("Введите поисковый запрос.");
             }
         }
+
         private async void LoadImages()
         {
             try
@@ -112,14 +110,37 @@ namespace WpfApp17
             }
         }
 
-        
-
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBoxItem comboBoxItem = (ComboBoxItem)Test.SelectedItem;
-            string selectedText = comboBoxItem.Content.ToString();
-            x = selectedText;
+            ComboBox comboBox = (ComboBox)sender;
 
+            if (comboBox != null && comboBox.SelectedItem != null)
+            {
+                string selectedText = ((ComboBoxItem)comboBox.SelectedItem).Content.ToString();
+
+                
+                x = selectedText;
+
+                
+                SearchButton_Click(sender, e);
+            }
         }
+        private void UserProfileButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new UserProfile(currentUser));
+        }
+
+        private void ImageListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            PixabayImage selectedImage = (PixabayImage)ImageListView.SelectedItem;
+
+            if (selectedImage != null)
+            {
+                NavigationService.Navigate(new PhotoPage(selectedImage.WebformatURL, selectedImage.Title, selectedImage.Author));
+            }
+        }
+
+
+
     }
 }

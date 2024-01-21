@@ -17,19 +17,72 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
             <TextBlock x:Name="UserNameTextBlock" FontWeight="Bold" Foreground="DarkGreen"/>
         </StackPanel>
+        
+        
 
         <ScrollViewer Grid.Row="1">
             <StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
                     <TextBox x:Name="SearchTextBox" Width="200" Height="25" VerticalAlignment="Center" Margin="0,0,10,0"/>
                     <Button Content="Поиск" Click="SearchButton_Click" Height="25"/>
-                    <ComboBox x:Name="Test" Width="50" Height="15" Margin="40,0,0,0" SelectionChanged="ComboBox_SelectionChanged">
-                        <ComboBoxItem>
-                            1
-                        </ComboBoxItem>
+                    
+                    <ComboBox x:Name="ColorComboBox" Width="100" Height="25" Margin="10,0,10,0" SelectionChanged="ComboBox_SelectionChanged">
+                        <ComboBoxItem>All</ComboBoxItem>
+                        <ComboBoxItem>grayscale</ComboBoxItem>
+                        <ComboBoxItem>transparent</ComboBoxItem>
+                        <ComboBoxItem>red</ComboBoxItem>
+                        <ComboBoxItem>orange</ComboBoxItem>
+                        <ComboBoxItem>yellow</ComboBoxItem>
+                        <ComboBoxItem>green</ComboBoxItem>
+                        <ComboBoxItem>turquoise</ComboBoxItem>
+                        <ComboBoxItem>blue</ComboBoxItem>
+                        <ComboBoxItem>lilac</ComboBoxItem>
+                        <ComboBoxItem>pink</ComboBoxItem>
+                        <ComboBoxItem>white</ComboBoxItem>
+                        <ComboBoxItem>gray</ComboBoxItem>
+                        <ComboBoxItem>black</ComboBoxItem>
+                        <ComboBoxItem>brown</ComboBoxItem>
                     </ComboBox>
+
+                    <ComboBox x:Name="CategoryComboBox" Width="100" Height="25" Margin="10,0,10,0" SelectionChanged="ComboBox_SelectionChanged">
+                        <ComboBoxItem>All</ComboBoxItem>
+                        <ComboBoxItem>backgrounds</ComboBoxItem>
+                        <ComboBoxItem>fashion</ComboBoxItem>
+                        <ComboBoxItem>nature</ComboBoxItem>
+                        <ComboBoxItem>science</ComboBoxItem>
+                        <ComboBoxItem>education</ComboBoxItem>
+                        <ComboBoxItem>feelings</ComboBoxItem>
+                        <ComboBoxItem>health</ComboBoxItem>
+                        <ComboBoxItem>people</ComboBoxItem>
+                        <ComboBoxItem>religion</ComboBoxItem>
+                        <ComboBoxItem>places</ComboBoxItem>
+                        <ComboBoxItem>animals</ComboBoxItem>
+                        <ComboBoxItem>industry</ComboBoxItem>
+                        <ComboBoxItem>computer</ComboBoxItem>
+                        <ComboBoxItem>food</ComboBoxItem>
+                        <ComboBoxItem>sports</ComboBoxItem>
+                        <ComboBoxItem>transportation</ComboBoxItem>
+                        <ComboBoxItem>travel</ComboBoxItem>
+                        <ComboBoxItem>buildings</ComboBoxItem>
+                        <ComboBoxItem>business</ComboBoxItem>
+                        <ComboBoxItem>music</ComboBoxItem>
+                    </ComboBox>
+
+                    <ComboBox x:Name="OrientationComboBox" Width="100" Height="25" Margin="10,0,10,0" SelectionChanged="ComboBox_SelectionChanged">
+                        <ComboBoxItem>All</ComboBoxItem>
+                        <ComboBoxItem>horizontal</ComboBoxItem>
+                        <ComboBoxItem>vertical</ComboBoxItem>
+                    </ComboBox>
+
+                    <ComboBox x:Name="OrderComboBox" Width="100" Height="25" Margin="10,0,10,0" SelectionChanged="ComboBox_SelectionChanged">
+                        
+                        <ComboBoxItem>popular</ComboBoxItem>
+                        <ComboBoxItem>latest</ComboBoxItem>
+                    </ComboBox>
+                    <Button Content="Профиль" Click="UserProfileButton_Click" Height="25" Margin="800,0,0,0"/>
                 </StackPanel>
-                <ListView Name="ImageListView">
+
+                <ListView Name="ImageListView" MouseDoubleClick="ImageListView_MouseDoubleClick">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Horizontal" Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}">
@@ -41,7 +94,6 @@
                             <Image Source="{Binding WebformatURL}" Width="200" Height="200"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                   
                 </ListView>
             </StackPanel>
         </ScrollViewer>

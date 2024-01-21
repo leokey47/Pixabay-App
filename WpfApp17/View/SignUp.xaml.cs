@@ -51,7 +51,7 @@ namespace WpfApp17.View
                     Password.Background = new SolidColorBrush(Colors.Red);
                     PasswordRepeat.Background = new SolidColorBrush(Colors.Red);
                     MessageBox.Show("Пароли не совпадают");
-                    return;  // Exit the method if passwords don't match
+                    return; 
                 }
 
                 users.Mail = Email.Text;
@@ -59,7 +59,7 @@ namespace WpfApp17.View
                 if (!IsValidEmail(users.Mail))
                 {
                     MessageBox.Show("Некорректный формат электронной почты");
-                    return; // Exit the method if email is not in a valid format
+                    return; 
                 }
 
                 byte[] image = null;
@@ -74,12 +74,13 @@ namespace WpfApp17.View
                         }
                     }
 
+                    //users.UsersImage = Convert.ToBase64String(image);
                     users.UsersImage = image;
                 }
                 else
                 {
                     MessageBox.Show("Выберите изображение");
-                    return;  // Exit the method if image file is not selected or doesn't exist
+                    return; 
                 }
 
                 AppData.db.USERS.Add(users);
@@ -124,7 +125,7 @@ namespace WpfApp17.View
 
         private void Login_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Handle text change event for Login
+            
         }
 
         private void Add_Image(object sender, RoutedEventArgs e)
