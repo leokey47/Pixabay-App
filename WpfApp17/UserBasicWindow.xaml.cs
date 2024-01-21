@@ -3,6 +3,7 @@ using System;
 using System.Net.Http;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using WpfApp17.Model;
 using WpfApp17.View;
 
@@ -13,11 +14,15 @@ namespace WpfApp17
         private const string APIKEY = "41778547-57ecc5a39ede505afd8e1cafc";
         private const string BASEURL = "https://pixabay.com/api/";
         public string x;
+        private USERS currentUser;
 
         public UserBasicWindow(USERS currentUser)
         {
             InitializeComponent();
+            this.currentUser = currentUser;
             LoadImages();
+
+            Console.WriteLine($"UserBasicWindow loaded for user: {currentUser.Login}");
         }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
@@ -120,5 +125,22 @@ namespace WpfApp17
                 SearchButton_Click(sender, e);
             }
         }
+        private void UserProfileButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new UserProfile(currentUser));
+        }
+
+        private void ImageListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            PixabayImage selectedImage = (PixabayImage)ImageListView.SelectedItem;
+
+            if (selectedImage != null)
+            {
+                NavigationService.Navigate(new PhotoPage(selectedImage.WebformatURL, selectedImage.Title, selectedImage.Author));
+            }
+        }
+
+
+
     }
 }

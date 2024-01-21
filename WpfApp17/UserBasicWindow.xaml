@@ -17,12 +17,15 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
             <TextBlock x:Name="UserNameTextBlock" FontWeight="Bold" Foreground="DarkGreen"/>
         </StackPanel>
+        
+        
 
         <ScrollViewer Grid.Row="1">
             <StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
                     <TextBox x:Name="SearchTextBox" Width="200" Height="25" VerticalAlignment="Center" Margin="0,0,10,0"/>
                     <Button Content="Поиск" Click="SearchButton_Click" Height="25"/>
+                    
                     <ComboBox x:Name="ColorComboBox" Width="100" Height="25" Margin="10,0,10,0" SelectionChanged="ComboBox_SelectionChanged">
                         <ComboBoxItem>All</ComboBoxItem>
                         <ComboBoxItem>grayscale</ComboBoxItem>
@@ -76,9 +79,10 @@
                         <ComboBoxItem>popular</ComboBoxItem>
                         <ComboBoxItem>latest</ComboBoxItem>
                     </ComboBox>
+                    <Button Content="Профиль" Click="UserProfileButton_Click" Height="25" Margin="800,0,0,0"/>
                 </StackPanel>
 
-                <ListView Name="ImageListView">
+                <ListView Name="ImageListView" MouseDoubleClick="ImageListView_MouseDoubleClick">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Horizontal" Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}">

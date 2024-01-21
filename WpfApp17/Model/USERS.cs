@@ -21,6 +21,6 @@ namespace WpfApp17.Model
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public System.DateTime Data { get; set; }
-        public byte[] UsersImage { get; internal set; }
+        public byte[] UsersImage { get; set; }
     }
 }
