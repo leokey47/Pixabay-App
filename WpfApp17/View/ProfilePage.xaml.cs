@@ -58,5 +58,10 @@ namespace WpfApp17.View
                 throw new Exception($"Ошибка при конвертации массива байтов в изображение: {ex.Message}", ex);
             }
         }
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Переход обратно на UserBasicWindow
+            NavigationService?.GoBack();
+        }
     }
 }
