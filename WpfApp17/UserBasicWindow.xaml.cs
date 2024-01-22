@@ -23,7 +23,7 @@ namespace WpfApp17
             this.currentUser = currentUser;
             LoadImages();
 
-            Console.WriteLine($"UserBasicWindow loaded for user: {currentUser.Login}");
+            //Console.WriteLine($"UserBasicWindow loaded for user: {currentUser.Login}");
         }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
@@ -103,8 +103,6 @@ namespace WpfApp17
                     var pixabayResponse = JsonConvert.DeserializeObject<PixabayResponse>(response);
                     var images = pixabayResponse.Hits.Select(hit => new PixabayImage
                     {
-                        //Id = hit.Id,
-                        // ... (остальные свойства)
                         Views = hit.Views,
                         Downloads = hit.Downloads,
                         Likes = hit.Likes,

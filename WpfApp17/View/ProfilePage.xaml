@@ -10,7 +10,6 @@
     <Grid>
         <StackPanel Margin="10">
             <Image x:Name="ProfileImage" Width="100" Height="100" Margin="0,0,0,10"/>
-            <!-- Добавлен Image для отображения изображения профиля -->
 
             <TextBlock Text="Логин:"/>
             <TextBlock x:Name="LoginTextBlock"/>

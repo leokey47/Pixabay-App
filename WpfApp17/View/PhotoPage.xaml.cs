@@ -21,7 +21,6 @@ namespace WpfApp17.View
         }
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            // Переход обратно на UserBasicWindow
             NavigationService?.GoBack();
         }
     }
