@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Data;
 using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
@@ -16,10 +17,12 @@ namespace WpfApp17.View
     public partial class SignUp : Page
     {
         string ImgLoc = "";
+        
 
         public SignUp()
         {
             InitializeComponent();
+            DateBirthday.DisplayDateEnd = DateTime.Now.AddYears(-10);
         }
 
         private string GetHash(string input)
@@ -41,17 +44,24 @@ namespace WpfApp17.View
                 users.LastName = LastName.Text;
                 users.Data = (DateTime)DateBirthday.SelectedDate;
                 users.Login = Login.Text;
-
-                if (Password.Password.ToString() == PasswordRepeat.Password.ToString())
+                int passwordLength = Password.Password.Length;
+                if (passwordLength > 8)
                 {
-                    users.Password = GetHash(Password.Password.ToString());
+                    if (Password.Password.ToString() == PasswordRepeat.Password.ToString())
+                    {
+                        users.Password = GetHash(Password.Password.ToString());
+                    }
+                    else
+                    {
+                        Password.Background = new SolidColorBrush(Colors.Red);
+                        PasswordRepeat.Background = new SolidColorBrush(Colors.Red);
+                        MessageBox.Show("Пароли не совпадают");
+                        return;
+                    }
                 }
                 else
                 {
-                    Password.Background = new SolidColorBrush(Colors.Red);
-                    PasswordRepeat.Background = new SolidColorBrush(Colors.Red);
-                    MessageBox.Show("Пароли не совпадают");
-                    return; 
+                    MessageBox.Show("Пароль должен состоять от 8 символов");
                 }
 
                 users.Mail = Email.Text;

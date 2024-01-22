@@ -26,7 +26,7 @@ namespace WpfApp17.View
             BirthDateTextBlock.Text = currentUser.Data.ToShortDateString();
             EmailTextBlock.Text = currentUser.Mail;
 
-            // Проверяем, что изображение пользователя не является null
+            
             if (currentUser.UsersImage != null && currentUser.UsersImage.Length > 0)
             {
                 BitmapImage bitmapImage = ByteArrayToBitmapImage(currentUser.UsersImage);
@@ -36,7 +36,7 @@ namespace WpfApp17.View
 
         private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
         {
-            // Логика изменения пароля
+            //логика изменения пароля
         }
 
         private BitmapImage ByteArrayToBitmapImage(byte[] byteArray)
@@ -57,6 +57,11 @@ namespace WpfApp17.View
             {
                 throw new Exception($"Ошибка при конвертации массива байтов в изображение: {ex.Message}", ex);
             }
+        }
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            NavigationService?.GoBack();
         }
     }
 }

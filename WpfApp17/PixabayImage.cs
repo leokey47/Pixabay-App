@@ -12,5 +12,9 @@ namespace WpfApp17
         public string WebformatURL { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
+        public int Views { get; set; }
+        public int Downloads { get; set; }
+        public int Likes { get; set; }
+        public int Comments { get; set; }
     }
 }
