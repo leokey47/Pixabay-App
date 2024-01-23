@@ -5,8 +5,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfApp17"
       mc:Ignorable="d" 
-      d:DesignHeight="1024" d:DesignWidth="1720" Background="Gray"
+      d:DesignHeight="1024" d:DesignWidth="1720" Background="#202020" 
       Title="UserBasicWindow">
+    
 
     <Grid>
         <Grid.RowDefinitions>
@@ -24,9 +25,12 @@
             <StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
                     <TextBox x:Name="SearchTextBox" Width="200" Height="25" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    <Button Content="Поиск" Click="SearchButton_Click" Height="25"/>
-                    
+                    <Button Content="Найти" Click="SearchButton_Click" Height="25" Background="#303030" Foreground="White"/>
+
                     <ComboBox x:Name="ColorComboBox" Width="100" Height="25" Margin="10,0,10,0" SelectionChanged="ComboBox_SelectionChanged">
+                        <ComboBox.Background>
+                            <SolidColorBrush Color="#303030"/>
+                        </ComboBox.Background>
                         <ComboBoxItem>All</ComboBoxItem>
                         <ComboBoxItem>grayscale</ComboBoxItem>
                         <ComboBoxItem>transparent</ComboBoxItem>
@@ -44,7 +48,7 @@
                         <ComboBoxItem>brown</ComboBoxItem>
                     </ComboBox>
 
-                    <ComboBox x:Name="CategoryComboBox" Width="100" Height="25" Margin="10,0,10,0" SelectionChanged="ComboBox_SelectionChanged">
+                    <ComboBox x:Name="CategoryComboBox" Width="100" Height="25" Margin="10,0,10,0" SelectionChanged="ComboBox_SelectionChanged" Text="Select category">
                         <ComboBoxItem>All</ComboBoxItem>
                         <ComboBoxItem>backgrounds</ComboBoxItem>
                         <ComboBoxItem>fashion</ComboBoxItem>
@@ -74,7 +78,7 @@
                         <ComboBoxItem>vertical</ComboBoxItem>
                     </ComboBox>
 
-                    <ComboBox x:Name="OrderComboBox" Width="100" Height="25" Margin="10,0,10,0" SelectionChanged="ComboBox_SelectionChanged">
+                    <ComboBox x:Name="OrderComboBox" Width="100" Height="25" Margin="10,0,10,0" SelectionChanged="ComboBox_SelectionChanged" >
                         
                         <ComboBoxItem>popular</ComboBoxItem>
                         <ComboBoxItem>latest</ComboBoxItem>
@@ -82,7 +86,7 @@
                     <Button Content="Профиль" Click="UserProfileButton_Click" Height="25" Margin="800,0,0,0"/>
                 </StackPanel>
 
-                <ListView Name="ImageListView" MouseDoubleClick="ImageListView_MouseDoubleClick">
+                <ListView Name="ImageListView" MouseDoubleClick="ImageListView_MouseDoubleClick" Background="#202020" BorderBrush="#202020">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Horizontal" Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}">
@@ -91,7 +95,7 @@
                     </ListView.ItemsPanel>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding WebformatURL}" Width="200" Height="200"/>
+                            <Image Source="{Binding WebformatURL}" Width="200" Height="200" />
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

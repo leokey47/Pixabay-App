@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:WpfApp17.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="SignUp" Background="DimGray">
+      Title="SignUp" Background="#202020">
 
     <Grid>
         <StackPanel Margin="0 30 0 0">

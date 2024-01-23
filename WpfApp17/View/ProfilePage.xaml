@@ -4,30 +4,68 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="480" d:DesignWidth="640" Background="LightGray"
+      d:DesignHeight="1024" d:DesignWidth="1720" Background="#202020"
       Title="UserProfilePage">
 
     <Grid>
-        <StackPanel Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Верхняя часть с профилем -->
+        <StackPanel Grid.Row="0" Margin="10">
             <Image x:Name="ProfileImage" Width="100" Height="100" Margin="0,0,0,10"/>
+            <TextBlock Text="Логин:" Foreground="#ffff" FontSize="29" x:Name="LoginTextBlock"/>
 
-            <TextBlock Text="Логин:"/>
-            <TextBlock x:Name="LoginTextBlock"/>
+            <TextBlock Text="Имя:" Foreground="#707070"/>
+            <TextBlock x:Name="FirstNameTextBlock" Text="Ваш текст здесь" Foreground="#FFFF"/>
 
-            <TextBlock Text="Имя:"/>
-            <TextBlock x:Name="FirstNameTextBlock"/>
+            <TextBlock Text="Фамилия:" Foreground="#707070"/>
+            <TextBlock x:Name="LastNameTextBlock" Text="Ваш текст здесь" Foreground="#FFFF"/>
 
-            <TextBlock Text="Фамилия:"/>
-            <TextBlock x:Name="LastNameTextBlock"/>
+            <TextBlock Text="Дата рождения:" Foreground="#707070"/>
+            <TextBlock x:Name="BirthDateTextBlock" Text="Ваш текст здесь" Foreground="#FFFF"/>
 
-            <TextBlock Text="Дата рождения:"/>
-            <TextBlock x:Name="BirthDateTextBlock"/>
+            <TextBlock Text="Почта:" Foreground="#707070"/>
+            <TextBlock x:Name="EmailTextBlock" Text="Ваш текст здесь" Foreground="#FFFF"/>
+        </StackPanel>
 
-            <TextBlock Text="Почта:"/>
-            <TextBlock x:Name="EmailTextBlock"/>
+        <!-- Средняя часть с контентом профиля -->
+        <StackPanel Grid.Row="1" Margin="10">
+            <!-- Ваши TextBlock-и для контента профиля -->
+        </StackPanel>
 
-            <Button Content="Изменить пароль" Click="ChangePasswordButton_Click" Margin="0,10,0,0"/>
-            <Button Content="Назад" Click="BackButton_Click" Margin="0,10,0,0"/>
+        <!-- Нижняя часть с кнопками -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10">
+            <Button Background="White" Width="130" Height="40" Content="Изменить пароль" FontSize="15" Click="ChangePasswordButton_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Foreground>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="Black" Offset="0" />
+                        <GradientStop Color="#202020" Offset="1.5" />
+                    </LinearGradientBrush>
+                </Button.Foreground>
+            </Button>
+
+            <Button Background="White" Width="130" Height="40" Content="Назад" FontSize="20" Click="BackButton_Click" Margin="10,0,0,0">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Foreground>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="Black" Offset="0" />
+                        <GradientStop Color="#202020" Offset="1.5" />
+                    </LinearGradientBrush>
+                </Button.Foreground>
+            </Button>
         </StackPanel>
     </Grid>
 </Page>

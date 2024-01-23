@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:WpfApp17.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="SignIn" Background="DimGray" Width="400" Height="450">
+        Title="Signin" Background="#202020">
 
     <Grid>
         <StackPanel Margin="0 80 0 0">
@@ -15,24 +15,29 @@
         <StackPanel VerticalAlignment="Center" Margin="55 0">
             <TextBlock FontSize="14" Margin="10" Text="Login" Foreground="#ffff"  Width="280"/>
             <TextBox x:Name="Login" Foreground="Black" 
-                     BorderBrush="White" BorderThickness="0 0 0 1.5" Width="280"/>
+                     BorderBrush="#353535" BorderThickness="0 0 0 1.5" Width="280"/>
             <TextBlock FontSize="14" Margin="10" Text="Password" Foreground="#ffff"  Width="280"/>
             <TextBox x:Name="Password" Foreground="Black" 
-                     BorderBrush="White" BorderThickness="0 0 0 1.5" Margin="0 0 0 20"  Width="280"/>
+                     BorderBrush="#353535" BorderThickness="0 0 0 1.5" Margin="0 0 0 20"  Width="280"/>
         </StackPanel>
         <StackPanel VerticalAlignment="Bottom">
             <Button x:Name="SignIn_btn" Width="100" Height="40" Margin="0 0 0 50" Background="White" Content="Sign in" FontSize="20" Click="SignIn_btn_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
                 <Button.Foreground>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="DeepSkyBlue" Offset="0" />
-                        <GradientStop Color="DarkViolet" Offset="1.5" />
+                        <GradientStop Color="Black" Offset="0" />
+                        <GradientStop Color="#202020" Offset="1.5" />
                     </LinearGradientBrush>
                 </Button.Foreground>
             </Button>
             <StackPanel Margin="50 10 10 10" Orientation="Horizontal">
                 <TextBlock Text="I don't have an account" Foreground="#ffffff" FontSize="18" FontWeight="Light" HorizontalAlignment="Center"/>
-                <Button x:Name="CreateAccount" Width="90" Height="30" Margin="20 0 0 20" Background="YellowGreen" BorderThickness="2" Content="SIGN UP" FontSize="16" 
-                        BorderBrush="Yellow" FontWeight="DemiBold" Click="CreateAccount_Click">
+                <Button x:Name="CreateAccount" Width="90" Height="30" Margin="20 0 0 20" Background="GhostWhite" BorderThickness="2" Content="SIGN UP" FontSize="16" 
+                        BorderBrush="Gray" FontWeight="DemiBold" Click="CreateAccount_Click" >
                 </Button>
             </StackPanel>
         </StackPanel>
