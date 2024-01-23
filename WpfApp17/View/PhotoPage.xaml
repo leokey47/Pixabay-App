@@ -14,8 +14,25 @@
             <TextBlock x:Name="ViewsTextBlock" FontSize="14"/>
             <TextBlock x:Name="LikesTextBlock" FontSize="14"/>
             <TextBlock x:Name="DownloadsTextBlock" FontSize="14"/>
-            
+
             <Button Content="Назад" Click="BackButton_Click" />
+            <Button Content="Добавить в избранное" Click="AddToFavoriteButton_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsFavorite}" Value="True">
+                                <Setter Property="Background" Value="Yellow"/>
+                                <!-- Добавьте другие изменения стиля для состояния "в избранном" -->
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsFavorite}" Value="False">
+                                <Setter Property="Background" Value="LightGray"/>
+                                <!-- Добавьте другие изменения стиля для состояния "не в избранном" -->
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
         </StackPanel>
     </Grid>
 </Page>

@@ -16,5 +16,6 @@ namespace WpfApp17
         public int Downloads { get; set; }
         public int Likes { get; set; }
         public int Comments { get; set; }
+        public bool IsFavorite { get; set; }
     }
 }

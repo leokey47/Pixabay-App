@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="60f99aa172d74c36a64bcbda4f7e6fb7" Name="Diagram1">
         <EntityTypeShape EntityType="PIXABAYModel.USERS" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PIXABAYModel.FavoriteImages" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
