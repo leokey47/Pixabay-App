@@ -15,15 +15,48 @@
         <StackPanel VerticalAlignment="Center" Margin="65">
             <TextBlock FontSize="14" Margin="5" Text="First Name" Foreground="#ffff" Width="280"/>
             <TextBox x:Name="FirstName" Foreground="Black" 
-                     BorderBrush="White" BorderThickness="0 0 0 1.5" Width="280"/>
+                     BorderBrush="White" BorderThickness="0 0 0 1.5" Width="280">
+                <TextBox.Template>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5">
+                            <ScrollViewer x:Name="PART_ContentHost" />
+                        </Border>
+                    </ControlTemplate>
+                </TextBox.Template>
+            </TextBox>
             <TextBlock FontSize="14" Margin="5" Text="Last Name" Foreground="#ffff" Width="280"/>
             <TextBox x:Name="LastName" Foreground="Black" 
-                     BorderBrush="White" BorderThickness="0 0 0 1.5" Width="280"/>
+                     BorderBrush="White" BorderThickness="0 0 0 1.5" Width="280">
+                <TextBox.Template>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5">
+                            <ScrollViewer x:Name="PART_ContentHost" />
+                        </Border>
+                    </ControlTemplate>
+                </TextBox.Template>
+            </TextBox>
             <TextBlock x:Name="dt" FontSize="14" Margin="5" Text="Date of Birth" Foreground="#ffff" Width="280"/>
             <DatePicker x:Name="DateBirthday" Width="280" IsTodayHighlighted="True" IsDropDownOpen="False" SelectedDateFormat="Short" SelectiveScrollingGrid.SelectiveScrollingOrientation="Horizontal"/>
             <TextBlock FontSize="14" Margin="5" Text="Login" Foreground="#ffff" Width="280"/>
             <TextBox x:Name="Login" Foreground="Black" 
-                     BorderBrush="White" BorderThickness="0 0 0 1.5" Width="280" TextChanged="Login_TextChanged"/>
+                     BorderBrush="White" BorderThickness="0 0 0 1.5" Width="280" TextChanged="Login_TextChanged">
+                <TextBox.Template>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5">
+                            <ScrollViewer x:Name="PART_ContentHost" />
+                        </Border>
+                    </ControlTemplate>
+                </TextBox.Template>
+            </TextBox>
             <TextBlock FontSize="14" Margin="5" Text="Email" Foreground="#ffff" Width="280"/>
             <TextBox x:Name="Email" Foreground="Black" 
                      BorderBrush="White" BorderThickness="0 0 0 1.5" Width="280">
@@ -34,39 +67,86 @@
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
+                <TextBox.Template>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5">
+                            <ScrollViewer x:Name="PART_ContentHost" />
+                        </Border>
+                    </ControlTemplate>
+                </TextBox.Template>
             </TextBox>
             <TextBlock FontSize="14" Margin="5" Text="Password" Foreground="#ffff" Width="280"/>
             <PasswordBox x:Name="Password" Foreground="Black" 
-                         BorderBrush="White" BorderThickness="0 0 0 1.5" Margin="0 0 0 0"  Width="280"/>
+                         BorderBrush="White" BorderThickness="0 0 0 1.5" Margin="0 0 0 0"  Width="280">
+                <PasswordBox.Template>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5">
+                            <ScrollViewer x:Name="PART_ContentHost" />
+                        </Border>
+                    </ControlTemplate>
+                </PasswordBox.Template>
+            </PasswordBox>
             <TextBlock FontSize="14" Margin="5" Text="Repeat password" Foreground="#ffff" Width="280"/>
             <PasswordBox x:Name="PasswordRepeat" Foreground="Black" 
-                         BorderBrush="White" BorderThickness="0 0 0 1.5" Margin="0 0 0 20"  Width="280"/>
+                         BorderBrush="White" BorderThickness="0 0 0 1.5" Margin="0 0 0 20"  Width="280">
+                <PasswordBox.Template>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5">
+                            <ScrollViewer x:Name="PART_ContentHost" />
+                        </Border>
+                    </ControlTemplate>
+                </PasswordBox.Template>
+            </PasswordBox>
             <Image x:Name="ImageView" Width="75" Height="75"/>
         </StackPanel>
         <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" Margin="80 0 0 0">
-            <Button x:Name="SignIn_btn" Width="100" Height="40" Margin="15 0 0 30" Background="White" Content="Sign in" FontSize="20" Click="SignIn_btn_Click">
+            <Button x:Name="SignInButton" Width="100" Height="40" Margin="15 0 0 30" Background="White" Content="Sign in" FontSize="20" Click="SignIn_btn_Click">
                 <Button.Foreground>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="DeepSkyBlue" Offset="0" />
-                        <GradientStop Color="DarkViolet" Offset="1.5" />
+                        <GradientStop Color="#202020" Offset="0" />
+                        <GradientStop Color="Black" Offset="1.5" />
                     </LinearGradientBrush>
                 </Button.Foreground>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
             </Button>
-            <Button x:Name="Image_btn" Width="100" Height="40" Margin="15 0 0 30" Background="White" Content="Image" FontSize="20" Click="Add_Image">
+            <Button x:Name="ImageBtn" Width="100" Height="40" Margin="15 0 0 30" Background="White" Content="Image" FontSize="20" Click="Add_Image">
                 <Button.Foreground>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="DeepSkyBlue" Offset="0" />
-                        <GradientStop Color="DarkViolet" Offset="1.5" />
+                        <GradientStop Color="#202020" Offset="0" />
+                        <GradientStop Color="Black" Offset="1.5" />
                     </LinearGradientBrush>
                 </Button.Foreground>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
             </Button>
-            <Button x:Name="Cancel" Width="100" Height="40" Margin="15 0 0 30" Background="White" Content="Cancel" FontSize="20" Click="Cancel_Click">
+            <Button x:Name="CancelButton" Width="100" Height="40" Margin="15 0 0 30" Background="White" Content="Cancel" FontSize="20" Click="Cancel_Click">
                 <Button.Foreground>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="DeepSkyBlue" Offset="0" />
-                        <GradientStop Color="DarkViolet" Offset="1.5" />
+                        <GradientStop Color="#202020" Offset="0" />
+                        <GradientStop Color="Black" Offset="1.5" />
                     </LinearGradientBrush>
                 </Button.Foreground>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
             </Button>
         </StackPanel>
     </Grid>
