@@ -26,5 +26,6 @@ namespace WpfApp17.Model
         }
     
         public virtual DbSet<USERS> USERS { get; set; }
+        public virtual DbSet<FavoriteImages> FavoriteImages { get; set; }
     }
 }

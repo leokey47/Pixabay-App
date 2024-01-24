@@ -101,13 +101,15 @@ namespace WpfApp17
                 {
                     var response = await client.GetStringAsync($"{BASEURL}?key={APIKEY}&q=car&image_type=photo");
                     var pixabayResponse = JsonConvert.DeserializeObject<PixabayResponse>(response);
-                    var images = pixabayResponse.Hits.Select(hit => new PixabayImage
+
+                    // Очищаем ImageListView и устанавливаем IsFavorite в false для каждого изображения перед загрузкой
+                    ImageListView.ItemsSource = null;
+                    foreach (var image in pixabayResponse.Hits)
                     {
-                        Views = hit.Views,
-                        Downloads = hit.Downloads,
-                        Likes = hit.Likes,
-                        Comments = hit.Comments
-                    });
+                        image.IsFavorite = false;
+                    }
+
+                    // Загружаем изображения в ImageListView
                     ImageListView.ItemsSource = pixabayResponse.Hits;
                 }
             }
@@ -116,6 +118,7 @@ namespace WpfApp17
                 MessageBox.Show($"Ошибка при загрузке изображений: {ex.Message}");
             }
         }
+
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -144,14 +147,19 @@ namespace WpfApp17
             if (selectedImage != null)
             {
                 NavigationService.Navigate(new PhotoPage(
+                    currentUser,
                     selectedImage.WebformatURL,
                     selectedImage.Title,
                     selectedImage.Author,
                     selectedImage.Views,
                     selectedImage.Likes,
-                    selectedImage.Downloads));
+                    selectedImage.Downloads,
+                    ImageListView // Передача ImageListView в конструктор PhotoPage
+                ));
             }
         }
+
+
 
 
 

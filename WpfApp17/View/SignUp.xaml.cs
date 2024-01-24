@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -34,7 +35,7 @@ namespace WpfApp17.View
             }
         }
 
-        private void SignIn_btn_Click(object sender, RoutedEventArgs e)
+        private async void SignIn_btn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -44,32 +45,38 @@ namespace WpfApp17.View
                 users.LastName = LastName.Text;
                 users.Data = (DateTime)DateBirthday.SelectedDate;
                 users.Login = Login.Text;
+
+                
                 int passwordLength = Password.Password.Length;
-                if (passwordLength > 8)
+
+                if (passwordLength >= 8)
                 {
-                    if (Password.Password.ToString() == PasswordRepeat.Password.ToString())
+                    if (Password.Password == PasswordRepeat.Password)
                     {
-                        users.Password = GetHash(Password.Password.ToString());
+                        users.Password = GetHash(Password.Password);
                     }
                     else
                     {
                         Password.Background = new SolidColorBrush(Colors.Red);
                         PasswordRepeat.Background = new SolidColorBrush(Colors.Red);
-                        MessageBox.Show("Пароли не совпадают");
+                        MessageBox.Show("пароли не совпадают");
                         return;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Пароль должен состоять от 8 символов");
+                    Password.Background = new SolidColorBrush(Colors.Red);
+                    PasswordRepeat.Background = new SolidColorBrush(Colors.Red);
+                    MessageBox.Show("пароль должен состоять минимум из 8 символов.");
+                    return;
                 }
 
                 users.Mail = Email.Text;
 
                 if (!IsValidEmail(users.Mail))
                 {
-                    MessageBox.Show("Некорректный формат электронной почты");
-                    return; 
+                    MessageBox.Show("некорректный формат электронной почты");
+                    return;
                 }
 
                 byte[] image = null;
@@ -84,13 +91,12 @@ namespace WpfApp17.View
                         }
                     }
 
-                    //users.UsersImage = Convert.ToBase64String(image);
                     users.UsersImage = image;
                 }
                 else
                 {
                     MessageBox.Show("Выберите изображение");
-                    return; 
+                    return;
                 }
 
                 AppData.db.USERS.Add(users);
@@ -114,6 +120,20 @@ namespace WpfApp17.View
                 MessageBox.Show($"Исключение: {ex.Message}");
             }
         }
+
+        private async Task<string> RequestPasswordAsync()
+        {
+            // Реализация диалогового окна с вопросом о пароле
+            // Можно использовать сторонние библиотеки для диалоговых окон или создать свое окно
+            // Возвращаем Task<string>, чтобы асинхронно получить введенный пароль
+            // Ваш код должен дождаться завершения этого метода, прежде чем продолжить выполнение
+            // Проверьте реальную реализацию для вашего интерфейса
+            return await Task.FromResult("DefaultPassword"); // Замените этот код на реальную реализацию
+        }
+
+
+     
+
 
         private bool IsValidEmail(string email)
         {
