@@ -9,36 +9,31 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Верхняя часть с профилем -->
-        <StackPanel Grid.Row="0" Margin="10">
-            <Image x:Name="ProfileImage" Width="100" Height="100" Margin="0,0,0,10"/>
-            <TextBlock Text="Логин:" Foreground="#ffff" FontSize="29" x:Name="LoginTextBlock"/>
-
-            <TextBlock Text="Имя:" Foreground="#707070"/>
-            <TextBlock x:Name="FirstNameTextBlock" Text="Ваш текст здесь" Foreground="#FFFF"/>
-
-            <TextBlock Text="Фамилия:" Foreground="#707070"/>
-            <TextBlock x:Name="LastNameTextBlock" Text="Ваш текст здесь" Foreground="#FFFF"/>
-
-            <TextBlock Text="Дата рождения:" Foreground="#707070"/>
-            <TextBlock x:Name="BirthDateTextBlock" Text="Ваш текст здесь" Foreground="#FFFF"/>
-
-            <TextBlock Text="Почта:" Foreground="#707070"/>
-            <TextBlock x:Name="EmailTextBlock" Text="Ваш текст здесь" Foreground="#FFFF"/>
+        
+        
+ 
+        <StackPanel Grid.Column="0" Margin="10,10,10,10" VerticalAlignment="Center">
+            <TextBlock Text="Логин:" Foreground="#707070" FontSize="40"/>
+            <TextBlock x:Name="LoginTextBlock" Text="Ваш текст здесь" Foreground="#FFFF" FontSize="40"/>
+            <TextBlock Text="Имя:" Foreground="#707070" FontSize="40"/>
+            <TextBlock x:Name="FirstNameTextBlock" Text="Ваш текст здесь" Foreground="#FFFF" FontSize="40"/>
+            <TextBlock Text="Фамилия:" Foreground="#707070" FontSize="40"/>
+            <TextBlock x:Name="LastNameTextBlock" Text="Ваш текст здесь" Foreground="#FFFF" FontSize="40"/>
+            <TextBlock Text="Дата рождения:" Foreground="#707070" FontSize="40"/>
+            <TextBlock x:Name="BirthDateTextBlock" Text="Ваш текст здесь" Foreground="#FFFF" FontSize="40"/>
+            <TextBlock Text="Почта:" Foreground="#707070" FontSize="40"/>
+            <TextBlock x:Name="EmailTextBlock" Text="Ваш текст здесь" Foreground="#FFFF" FontSize="40"/>
         </StackPanel>
 
-        <!-- Средняя часть с контентом профиля -->
-        <StackPanel Grid.Row="1" Margin="10">
-            <!-- Ваши TextBlock-и для контента профиля -->
-        </StackPanel>
+        
+        <Image Grid.Column="1" x:Name="ProfileImage" Width="300" Height="300" Margin="10,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-        <!-- Нижняя часть с кнопками -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10">
+        
+        <StackPanel Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,0,10" Orientation="Horizontal">
             <Button Background="White" Width="130" Height="40" Content="Изменить пароль" FontSize="15" Click="ChangePasswordButton_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
@@ -53,7 +48,20 @@
                 </Button.Foreground>
             </Button>
 
-            <Button Background="White" Width="130" Height="40" Content="Назад" FontSize="20" Click="BackButton_Click" Margin="10,0,0,0">
+            <Button Background="White" Width="130" Height="40" Content="Назад" FontSize="20" Click="BackButton_Click" Margin="10,0,0,0" >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Foreground>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="Black" Offset="0" />
+                        <GradientStop Color="#202020" Offset="1.5" />
+                    </LinearGradientBrush>
+                </Button.Foreground>
+            </Button>
+            <Button Background="White" Width="130" Height="40" Content="Избранное" FontSize="20" Click="FavoriteImages_Click" Margin="10,0,0,0" >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>

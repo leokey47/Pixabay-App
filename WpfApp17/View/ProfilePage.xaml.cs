@@ -38,7 +38,10 @@ namespace WpfApp17.View
         {
             //логика изменения пароля
         }
+        private void FavoriteImages_Click()
+        {
 
+        }
         private BitmapImage ByteArrayToBitmapImage(byte[] byteArray)
         {
             try
