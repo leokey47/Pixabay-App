@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FavoriteImage.cs" />
     <Compile Include="Model\AppData.cs" />
     <Compile Include="Model\FavoriteImages.cs">
       <DependentUpon>Model1.tt</DependentUpon>
