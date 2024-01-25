@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -97,8 +99,45 @@ namespace WpfApp17.View
 
         private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
         {
-            // Логика изменения пароля
+            ChangePasswordDialog dialog = new ChangePasswordDialog();
+            if (dialog.ShowDialog() == true)
+            {
+                string oldPassword = dialog.OldPassword;
+                string newPassword = dialog.NewPassword;
+
+                // Ваша логика для проверки старого пароля и изменения пароля
+                // Пример:
+                if (!string.IsNullOrEmpty(currentUser.Password) &&
+                    !string.IsNullOrEmpty(oldPassword) &&
+                    string.Equals(currentUser.Password, GetHash(oldPassword), StringComparison.Ordinal) &&
+                    !string.IsNullOrEmpty(newPassword) &&
+                    newPassword.Length >= 8)
+                {
+                    // Измените пароль в базе данных
+                    using (var context = new PIXABAYEntities())
+                    {
+                        var user = context.USERS.Find(currentUser.ID);
+                        user.Password = GetHash(newPassword);
+                        context.SaveChanges();
+                    }
+                    MessageBox.Show("Password changed successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Invalid old password or new password does not meet the requirements.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
+
+        private string GetHash(string input)
+        {
+            using (var md5 = MD5.Create())
+            {
+                var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
+                return Convert.ToBase64String(hash);
+            }
+        }
+
 
         private void FavoriteImages_Click(object sender, RoutedEventArgs e)
         {
