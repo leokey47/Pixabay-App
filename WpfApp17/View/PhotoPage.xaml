@@ -18,6 +18,7 @@
 
             <Button Content="Назад" Click="BackButton_Click" />
             <Button Content="User profile"  Click="WebUser_Click" />
+            <Button Content="Скачать" Click="DownloadButton_Click"/>
             <Button Content="В избранное" Click="AddToFavoriteButton_Click">
                 <Button.Style>
                     <Style TargetType="Button">
