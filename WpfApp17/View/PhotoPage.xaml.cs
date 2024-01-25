@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Data.Entity;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -31,6 +33,42 @@ namespace WpfApp17.View
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService?.GoBack();
+        }
+
+        private void DownloadButton_Click(object sender, RoutedEventArgs e)
+        {
+            PixabayImage selectedImage = (PixabayImage)imageListView.SelectedItem;
+
+            if (selectedImage != null)
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Image files (*.png;*.jpg;*.jpeg;*.gif;*.bmp)|*.png;*.jpg;*.jpeg;*.gif;*.bmp|All files (*.*)|*.*";
+
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    try
+                    {
+                        // Получаем изображение по URL и сохраняем по указанному пути
+                        BitmapImage image = new BitmapImage(new Uri(selectedImage.WebformatURL));
+                        BitmapEncoder encoder = new PngBitmapEncoder(); // Выберите нужный вам формат
+                        encoder.Frames.Add(BitmapFrame.Create(image));
+
+                        using (FileStream fileStream = new FileStream(saveFileDialog.FileName, FileMode.Create))
+                        {
+                            encoder.Save(fileStream);
+                            MessageBox.Show("Изображение успешно сохранено.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Ошибка при сохранении изображения: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите изображение для скачивания.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private async void AddToFavoriteButton_Click(object sender, RoutedEventArgs e)
