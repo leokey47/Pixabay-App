@@ -6,6 +6,12 @@
       mc:Ignorable="d" 
       d:DesignHeight="1024" d:DesignWidth="1720" Background="#202020"
       Title="UserProfilePage">
+    <Page.Resources>
+        <Style TargetType="ListBox">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+    </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -57,7 +63,7 @@
                 </Button.Foreground>
             </Button>
 
-            <Button Background="White" Width="130" Height="40" Content="Избранное" FontSize="20" Click="FavoriteImages_Click" Margin="10,0,0,0" >
+            <Button Background="White" Width="130" Height="40" Content="Избранное уд" FontSize="20" Click="DeleteFavoriteImages_Click" Margin="10,0,0,0" >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>
@@ -72,22 +78,26 @@
             </Button>
         </StackPanel>
 
-        <!-- Добавленный StackPanel для отображения избранных изображений -->
         <!-- Добавленный ItemsControl для отображения избранных изображений -->
         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
-            <ItemsControl x:Name="FavoriteImagesPanel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,10">
-                <ItemsControl.ItemsPanel>
+            <ListBox x:Name="FavoriteImagesListBox" Background="#202020" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,10" SelectionChanged="FavoriteImagesListBox_SelectionChanged">
+                <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Image Source="{Binding ImageUrl}" Width="150" Height="150" Margin="5"/>
+                        <Image Source="{Binding ImageUrl}" Width="150" Height="150" Margin="5">
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <EventSetter Event="MouseLeftButtonDown" Handler="Image_MouseLeftButtonDown"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
                     </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </ScrollViewer>
-        
     </Grid>
 </Page>
