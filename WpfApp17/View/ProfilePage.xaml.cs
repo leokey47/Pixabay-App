@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using WpfApp17.Model;
 
@@ -62,39 +63,10 @@ namespace WpfApp17.View
             }
         }
 
-
-
         private void DisplayFavoriteImages()
         {
-            FavoriteImagesPanel.Items.Clear();
-
-            foreach (var favoriteImage in FavoriteImages)
-            {
-                Image image = CreateImageFromUrl(favoriteImage.ImageUrl);
-                if (image != null)
-                {
-                    FavoriteImagesPanel.Items.Add(image);
-                }
-            }
-        }
-
-
-        private Image CreateImageFromUrl(string url)
-        {
-            try
-            {
-                Image image = new Image();
-                image.Source = new BitmapImage(new Uri(url));
-                image.Width = 150;
-                image.Height = 150;
-                image.Margin = new Thickness(5);
-                return image;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка при создании изображения из URL: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return null;
-            }
+            FavoriteImagesListBox.ItemsSource = null; // Очищаем старые данные
+            FavoriteImagesListBox.ItemsSource = FavoriteImages; // Устанавливаем обновленный источник данных
         }
 
         private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
@@ -105,15 +77,12 @@ namespace WpfApp17.View
                 string oldPassword = dialog.OldPassword;
                 string newPassword = dialog.NewPassword;
 
-                // Ваша логика для проверки старого пароля и изменения пароля
-                // Пример:
                 if (!string.IsNullOrEmpty(currentUser.Password) &&
                     !string.IsNullOrEmpty(oldPassword) &&
                     string.Equals(currentUser.Password, GetHash(oldPassword), StringComparison.Ordinal) &&
                     !string.IsNullOrEmpty(newPassword) &&
                     newPassword.Length >= 8)
                 {
-                    // Измените пароль в базе данных
                     using (var context = new PIXABAYEntities())
                     {
                         var user = context.USERS.Find(currentUser.ID);
@@ -129,6 +98,79 @@ namespace WpfApp17.View
             }
         }
 
+        private void DeleteFavoriteImages_Click(object sender, RoutedEventArgs e)
+        {
+            List<FavoriteImages> imagesToDelete = GetSelectedFavoriteImages();
+
+            if (imagesToDelete.Count > 0)
+            {
+                try
+                {
+                    using (var context = new PIXABAYEntities())
+                    {
+                        foreach (var imageToDelete in imagesToDelete)
+                        {
+                            var image = context.FavoriteImages.Find(imageToDelete.Id);
+                            if (image != null)
+                            {
+                                context.FavoriteImages.Remove(image);
+                            }
+                        }
+
+                        context.SaveChanges();
+                        LoadFavoriteImages();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при удалении избранных изображений: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите изображения для удаления.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+
+
+
+        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Image clickedImage)
+            {
+                if (clickedImage.DataContext is FavoriteImages favoriteImage)
+                {
+                    
+                    //MessageBox.Show($"Выбрано изображение: {favoriteImage.ImageUrl}", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+        }
+
+        private List<FavoriteImages> selectedFavoriteImages = new List<FavoriteImages>();
+
+        private void FavoriteImagesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedFavoriteImages.Clear();
+            foreach (var selectedItem in FavoriteImagesListBox.SelectedItems)
+            {
+                if (selectedItem is FavoriteImages favoriteImage)
+                {
+                    selectedFavoriteImages.Add(favoriteImage);
+                }
+            }
+        }
+
+        public List<FavoriteImages> GetSelectedFavoriteImages()
+        {
+            return selectedFavoriteImages;
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.GoBack();
+        }
+
         private string GetHash(string input)
         {
             using (var md5 = MD5.Create())
@@ -136,21 +178,6 @@ namespace WpfApp17.View
                 var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
                 return Convert.ToBase64String(hash);
             }
-        }
-
-
-        private void FavoriteImages_Click(object sender, RoutedEventArgs e)
-        {
-            // Логика для обработки клика по кнопке "Избранное"
-            // Например, можно открыть новую страницу для отображения избранных фотографий
-            // Пример:
-            // var favoriteImagesPage = new FavoriteImagesPage(currentUser, FavoriteImages);
-            // NavigationService?.Navigate(favoriteImagesPage);
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService?.GoBack();
         }
 
         private BitmapImage ByteArrayToBitmapImage(byte[] byteArray)
