@@ -205,5 +205,20 @@ namespace WpfApp17.View
                 return null;
             }
         }
+
+        private void SignOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Добавьте код, который будет выполняться при выходе из аккаунта,
+            // например, сброс данных текущего пользователя и переход на страницу входа.
+
+            // Пример:
+            // Сброс текущего пользователя
+            currentUser = null;
+
+            // Переход на страницу входа
+            SignIn signIn = new SignIn(); // Замените на фактический класс/страницу для входа
+            NavigationService?.Navigate(signIn);
+        }
+
     }
 }

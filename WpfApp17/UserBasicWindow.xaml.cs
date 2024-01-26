@@ -24,6 +24,7 @@ namespace WpfApp17
             LoadImages();
 
             //Console.WriteLine($"UserBasicWindow loaded for user: {currentUser.Login}");
+
         }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)

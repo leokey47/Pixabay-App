@@ -76,6 +76,19 @@
                     </LinearGradientBrush>
                 </Button.Foreground>
             </Button>
+            <Button Background="White" Width="130" Height="40" Content="Выйти из учетной записи" FontSize="20" Click="SignOutButton_Click" Margin="10,0,0,0" >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Foreground>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="Black" Offset="0" />
+                        <GradientStop Color="#202020" Offset="1.5" />
+                    </LinearGradientBrush>
+                </Button.Foreground>
+            </Button>
         </StackPanel>
 
         <!-- Добавленный ItemsControl для отображения избранных изображений -->
