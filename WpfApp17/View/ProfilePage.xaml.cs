@@ -88,7 +88,11 @@ namespace WpfApp17.View
                         var user = context.USERS.Find(currentUser.ID);
                         user.Password = GetHash(newPassword);
                         context.SaveChanges();
+
+                        // Обновляем currentUser с новым паролем
+                        currentUser = user;
                     }
+
                     MessageBox.Show("Password changed successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
@@ -97,6 +101,7 @@ namespace WpfApp17.View
                 }
             }
         }
+
 
         private void DeleteFavoriteImages_Click(object sender, RoutedEventArgs e)
         {
