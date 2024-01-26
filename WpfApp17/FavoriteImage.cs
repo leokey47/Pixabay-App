@@ -8,9 +8,12 @@ namespace WpfApp17.Model
 {
     public class FavoriteImage
     {
+
         public int Id { get; set; }
         public string ImageUrl { get; set; }
         public string Title { get; set; }
+        public int ImageId { get; set; }
+        public int UserId { get; set; }
     }
 }
 

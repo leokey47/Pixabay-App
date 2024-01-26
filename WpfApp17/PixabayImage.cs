@@ -17,5 +17,7 @@ namespace WpfApp17
         public int Likes { get; set; }
         public int Comments { get; set; }
         public bool IsFavorite { get; set; }
+        public int ImageId { get; set; }
+        public int id { get; set; }
     }
 }

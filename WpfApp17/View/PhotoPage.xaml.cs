@@ -1,7 +1,12 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks; // Добавлено для использования async и Task
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -11,16 +16,15 @@ namespace WpfApp17.View
 {
     public partial class PhotoPage : Page
     {
-        private USERS currentUser; 
+        private USERS currentUser;
         private ListView imageListView;
 
         public PhotoPage(USERS currentUser, string imageUrl, string title, string author, int views, int likes, int downloads, ListView imageListView)
         {
             InitializeComponent();
-            this.currentUser = currentUser; 
-            this.imageListView = imageListView; 
+            this.currentUser = currentUser;
+            this.imageListView = imageListView;
 
-            
             PhotoImage.Source = new BitmapImage(new Uri(imageUrl));
             TitleTextBlock.Text = title;
             AuthorTextBlock.Text = author;
@@ -28,7 +32,6 @@ namespace WpfApp17.View
             LikesTextBlock.Text = $"Лайки: {likes}";
             DownloadsTextBlock.Text = $"Скачивания: {downloads}";
         }
-
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
@@ -48,9 +51,8 @@ namespace WpfApp17.View
                 {
                     try
                     {
-                        // Получаем изображение по URL и сохраняем по указанному пути
                         BitmapImage image = new BitmapImage(new Uri(selectedImage.WebformatURL));
-                        BitmapEncoder encoder = new PngBitmapEncoder(); // Выберите нужный вам формат
+                        BitmapEncoder encoder = new PngBitmapEncoder();
                         encoder.Frames.Add(BitmapFrame.Create(image));
 
                         using (FileStream fileStream = new FileStream(saveFileDialog.FileName, FileMode.Create))
@@ -79,50 +81,56 @@ namespace WpfApp17.View
             {
                 using (var context = new PIXABAYEntities())
                 {
-                    FavoriteImages favoriteImage = await context.FavoriteImages
-                        .FirstOrDefaultAsync(f => f.UserId == currentUser.ID && f.ImageUrl == selectedImage.WebformatURL);
+                    string uniqueTitle = GetUniqueTitle(selectedImage.ImageId);
+                    // Проверяем, есть ли такой титул у текущего пользователя
+                    FavoriteImages existingFavorite = await Task.Run(() =>
+    context.FavoriteImages.FirstOrDefault(f => f.UserId == currentUser.ID && f.Title == uniqueTitle));
 
-                    if (favoriteImage == null)
+
+                    if (existingFavorite == null)
                     {
-                        
-                        favoriteImage = new FavoriteImages
+                        if (!string.IsNullOrEmpty(uniqueTitle))
                         {
-                            UserId = currentUser.ID,
-                            ImageUrl = selectedImage.WebformatURL,
-                            Title = selectedImage.Title,
-                            
-                        };
+                            // Если нет, добавляем в избранное
+                            FavoriteImages favoriteImage = new FavoriteImages
+                            {
+                                UserId = currentUser.ID,
+                                ImageUrl = selectedImage.WebformatURL,
+                                Title = uniqueTitle,
+                                // Другие свойства...
+                            };
 
-                        context.FavoriteImages.Add(favoriteImage);
-                        await context.SaveChangesAsync();
-                        selectedImage.IsFavorite = true; 
-                        MessageBox.Show("Изображение добавлено в избранное.");
+                            context.FavoriteImages.Add(favoriteImage);
+                            await context.SaveChangesAsync();
+                            selectedImage.IsFavorite = true;
+                            MessageBox.Show("Изображение добавлено в избранное.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Не удалось добавить изображение в избранное: отсутствует уникальный заголовок.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
                     else
                     {
-                        
-                        context.FavoriteImages.Remove(favoriteImage);
+                        // Если титул уже существует, удаляем из избранного
+                        context.FavoriteImages.Remove(existingFavorite);
                         await context.SaveChangesAsync();
-                        selectedImage.IsFavorite = false; 
+                        selectedImage.IsFavorite = false;
                         MessageBox.Show("Изображение удалено из избранного.");
                     }
                 }
             }
         }
+
+
+        private string GetUniqueTitle(int imageId)
+        {
+            return $"Image_{imageId}";
+        }
+
         private void WebUser_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new WebUser());
         }
-
-
     }
-
 }
-
-
-
-
-    
-
-
-
