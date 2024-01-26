@@ -48,9 +48,8 @@ namespace WpfApp17.View
                 {
                     try
                     {
-                        // Получаем изображение по URL и сохраняем по указанному пути
                         BitmapImage image = new BitmapImage(new Uri(selectedImage.WebformatURL));
-                        BitmapEncoder encoder = new PngBitmapEncoder(); // Выберите нужный вам формат
+                        BitmapEncoder encoder = new PngBitmapEncoder(); 
                         encoder.Frames.Add(BitmapFrame.Create(image));
 
                         using (FileStream fileStream = new FileStream(saveFileDialog.FileName, FileMode.Create))

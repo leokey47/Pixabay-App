@@ -17,9 +17,7 @@ using WpfApp17.Model;
 
 namespace WpfApp17.View
 {
-    /// <summary>
-    /// Логика взаимодействия для SignIn.xaml
-    /// </summary>
+    
     public partial class SignIn : Page
     {
         public SignIn()
