@@ -37,7 +37,7 @@ namespace WpfApp17.View
 
         private void SignIn_btn_Click(object sender, RoutedEventArgs e)
         {
-            var x = GetHash(Password.Text);
+            var x = GetHash(Password.Password); 
             var CurrentUser = AppData.db.USERS.FirstOrDefault(u => u.Login == Login.Text && u.Password == x);
 
             if (CurrentUser != null)
@@ -50,16 +50,13 @@ namespace WpfApp17.View
                 {
                     MessageBox.Show("Password");
                 }
-
-
             }
             else
             {
                 MessageBox.Show("Такой записи нет в БД", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-
         }
+
 
         private void CreateAccount_Click(object sender, RoutedEventArgs e)
         {
