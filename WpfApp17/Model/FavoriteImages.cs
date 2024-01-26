@@ -15,7 +15,7 @@ namespace WpfApp17.Model
     public partial class FavoriteImages
     {
         public int Id { get; set; }
-        public Nullable<int> UserId { get; set; }
+        public int UserId { get; set; }
         public string ImageUrl { get; set; }
         public string Title { get; set; }
     }

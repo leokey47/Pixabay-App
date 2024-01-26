@@ -13,10 +13,10 @@ namespace WpfApp17.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PIXABAYEntities : DbContext
+    public partial class PIXABAYEntities1 : DbContext
     {
-        public PIXABAYEntities()
-            : base("name=PIXABAYEntities")
+        public PIXABAYEntities1()
+            : base("name=PIXABAYEntities1")
         {
         }
     
@@ -25,7 +25,7 @@ namespace WpfApp17.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<USERS> USERS { get; set; }
         public virtual DbSet<FavoriteImages> FavoriteImages { get; set; }
+        public virtual DbSet<USERS> USERS { get; set; }
     }
 }

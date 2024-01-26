@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -76,39 +77,55 @@ namespace WpfApp17.View
 
             if (selectedImage != null)
             {
-                using (var context = new PIXABAYEntities())
+                using (var context = new PIXABAYEntities1())
                 {
-                    FavoriteImages favoriteImage = await context.FavoriteImages
-                        .FirstOrDefaultAsync(f => f.UserId == currentUser.ID && f.ImageUrl == selectedImage.WebformatURL);
-
-                    if (favoriteImage == null)
+                    try
                     {
-                        
-                        favoriteImage = new FavoriteImages
+                        FavoriteImages favoriteImage = await context.FavoriteImages
+                            .FirstOrDefaultAsync(f => f.UserId == currentUser.ID && f.ImageUrl == selectedImage.WebformatURL);
+
+                        if (favoriteImage == null)
                         {
-                            UserId = currentUser.ID,
-                            ImageUrl = selectedImage.WebformatURL,
-                            Title = selectedImage.Title,
-                            
-                        };
+                            favoriteImage = new FavoriteImages
+                            {
+                                UserId = currentUser.ID,
+                                ImageUrl = selectedImage.WebformatURL,
+                                Title = "qwe",
+                                //Title = selectedImage.Title,
+                            };
 
-                        context.FavoriteImages.Add(favoriteImage);
-                        await context.SaveChangesAsync();
-                        selectedImage.IsFavorite = true; 
-                        MessageBox.Show("Изображение добавлено в избранное.");
+                            context.FavoriteImages.Add(favoriteImage);
+                            await context.SaveChangesAsync();
+                            selectedImage.IsFavorite = true;
+                            MessageBox.Show("Изображение добавлено в избранное.");
+                        }
+                        else
+                        {
+                            context.FavoriteImages.Remove(favoriteImage);
+                            await context.SaveChangesAsync();
+                            selectedImage.IsFavorite = false;
+                            MessageBox.Show("Изображение удалено из избранного.");
+                        }
                     }
-                    else
+                    catch (DbEntityValidationException ex)
                     {
-                        
-                        context.FavoriteImages.Remove(favoriteImage);
-                        await context.SaveChangesAsync();
-                        selectedImage.IsFavorite = false; 
-                        MessageBox.Show("Изображение удалено из избранного.");
-                        //lev branch
+                        // Handle validation errors
+                        foreach (var validationErrors in ex.EntityValidationErrors)
+                        {
+                            foreach (var validationError in validationErrors.ValidationErrors)
+                            {
+                                MessageBox.Show($"Validation Error - Property: {validationError.PropertyName}, Error: {validationError.ErrorMessage}", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Ошибка при выполнении операции: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }
         }
+
         private void WebUser_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new WebUser());

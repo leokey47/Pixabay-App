@@ -44,7 +44,7 @@ namespace WpfApp17.View
         {
             try
             {
-                using (var context = new PIXABAYEntities())
+                using (var context = new PIXABAYEntities1())
                 {
                     FavoriteImages.Clear();
 
@@ -83,7 +83,7 @@ namespace WpfApp17.View
                     !string.IsNullOrEmpty(newPassword) &&
                     newPassword.Length >= 8)
                 {
-                    using (var context = new PIXABAYEntities())
+                    using (var context = new PIXABAYEntities1())
                     {
                         var user = context.USERS.Find(currentUser.ID);
                         user.Password = GetHash(newPassword);
@@ -111,7 +111,7 @@ namespace WpfApp17.View
             {
                 try
                 {
-                    using (var context = new PIXABAYEntities())
+                    using (var context = new PIXABAYEntities1())
                     {
                         foreach (var imageToDelete in imagesToDelete)
                         {

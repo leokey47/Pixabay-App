@@ -8,6 +8,6 @@ namespace WpfApp17.Model
 {
     internal class AppData
     {
-        public static PIXABAYEntities db = new PIXABAYEntities();
+        public static PIXABAYEntities1 db = new PIXABAYEntities1();
     }
 }
