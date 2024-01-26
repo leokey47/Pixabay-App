@@ -104,6 +104,7 @@ namespace WpfApp17.View
                         await context.SaveChangesAsync();
                         selectedImage.IsFavorite = false; 
                         MessageBox.Show("Изображение удалено из избранного.");
+                        //lev branch
                     }
                 }
             }
