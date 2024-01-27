@@ -19,6 +19,6 @@ namespace WpfApp17
         public int Comments { get; set; }
         public bool IsFavorite { get; set; }
         public int ImageId { get; set; }
-        public int id { get; set; }
+        public int Id { get; set; }
     }
 }

@@ -81,10 +81,12 @@ namespace WpfApp17.View
             {
                 using (var context = new PIXABAYEntities())
                 {
-                    string uniqueTitle = GetUniqueTitle(selectedImage.ImageId);
+                    string uniqueTitle = GetUniqueTitle(selectedImage.Id);
+
+
                     // Проверяем, есть ли такой титул у текущего пользователя
                     FavoriteImages existingFavorite = await Task.Run(() =>
-    context.FavoriteImages.FirstOrDefault(f => f.UserId == currentUser.ID && f.Title == uniqueTitle));
+                        context.FavoriteImages.FirstOrDefault(f => f.UserId == currentUser.ID && f.Title == uniqueTitle));
 
 
                     if (existingFavorite == null)
@@ -122,11 +124,11 @@ namespace WpfApp17.View
             }
         }
 
-
-        private string GetUniqueTitle(int imageId)
+        private string GetUniqueTitle(int id)
         {
-            return $"Image_{imageId}";
+            return $"Image_{id}";
         }
+
 
         private void WebUser_Click(object sender, RoutedEventArgs e)
         {
