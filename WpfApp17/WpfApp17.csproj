@@ -202,6 +202,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\pixabay_w.png" />
+    <Resource Include="Images\Pixabay-logo.png" />
+    <Resource Include="Images\pixabay_ww.png" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
