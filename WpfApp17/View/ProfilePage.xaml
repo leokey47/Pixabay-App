@@ -19,20 +19,32 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="0" Margin="10,10,10,10" VerticalAlignment="Center">
-            <TextBlock Text="Логин:" Foreground="#707070" FontSize="40"/>
-            <TextBlock x:Name="LoginTextBlock" Text="Ваш текст здесь" Foreground="#FFFF" FontSize="40"/>
-            <TextBlock Text="Имя:" Foreground="#707070" FontSize="40"/>
-            <TextBlock x:Name="FirstNameTextBlock" Text="Ваш текст здесь" Foreground="#FFFF" FontSize="40"/>
-            <TextBlock Text="Фамилия:" Foreground="#707070" FontSize="40"/>
-            <TextBlock x:Name="LastNameTextBlock" Text="Ваш текст здесь" Foreground="#FFFF" FontSize="40"/>
-            <TextBlock Text="Дата рождения:" Foreground="#707070" FontSize="40"/>
-            <TextBlock x:Name="BirthDateTextBlock" Text="Ваш текст здесь" Foreground="#FFFF" FontSize="40"/>
-            <TextBlock Text="Почта:" Foreground="#707070" FontSize="40"/>
-            <TextBlock x:Name="EmailTextBlock" Text="Ваш текст здесь" Foreground="#FFFF" FontSize="40"/>
+        <StackPanel Grid.Column="1" Margin="10,10,10,10" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <!-- TextBlock для каждой строки в Grid -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Логин: " Foreground="#707070" FontSize="40"/>
+                    <TextBlock Text="Имя: " Foreground="#707070" FontSize="40"/>
+                    <TextBlock Text="Фамилия: " Foreground="#707070" FontSize="40"/>
+                    <TextBlock Text="Дата рождения: " Foreground="#707070" FontSize="40"/>
+                    <TextBlock Text="Почта: " Foreground="#707070" FontSize="40"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <TextBlock x:Name="LoginTextBlock" Text="Ваш текст здесь" Foreground="#FFFF" FontSize="40"/>
+                    <TextBlock x:Name="FirstNameTextBlock" Text="Ваш текст здесь" Foreground="#FFFF" FontSize="40"/>
+                    <TextBlock x:Name="LastNameTextBlock" Text="Ваш текст здесь" Foreground="#FFFF" FontSize="40"/>
+                    <TextBlock x:Name="BirthDateTextBlock" Text="Ваш текст здесь" Foreground="#FFFF" FontSize="40"/>
+                    <TextBlock x:Name="EmailTextBlock" Text="Ваш текст здесь" Foreground="#FFFF" FontSize="40"/>
+                </StackPanel>
+            </Grid>
         </StackPanel>
 
-        <Image Grid.Column="1" x:Name="ProfileImage" Width="300" Height="300" Margin="10,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Image Grid.Column="0" x:Name="ProfileImage" Width="300" Height="300" Margin="10,10,10,10" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
 
         <StackPanel Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,0,10" Orientation="Horizontal">
             <Button Background="White" Width="130" Height="40" Content="Изменить пароль" FontSize="15" Click="ChangePasswordButton_Click">
