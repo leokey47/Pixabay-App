@@ -92,10 +92,7 @@ namespace WpfApp17
                     MessageBox.Show($"Ошибка при загрузке изображений: {ex.Message}");
                 }
             }
-            else
-            {
-                MessageBox.Show("Пожалуйста, введите текст для поиска.");
-            }
+            
         }
 
         private async Task LoadImagesToUI(List<PixabayImage> images)

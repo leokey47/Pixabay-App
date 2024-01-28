@@ -19,7 +19,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="1" Margin="10,10,10,10" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="0" Margin="10,10,10,10" VerticalAlignment="Center" HorizontalAlignment="Center">
             <!-- TextBlock для каждой строки в Grid -->
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -40,13 +40,14 @@
                     <TextBlock x:Name="BirthDateTextBlock" Text="Ваш текст здесь" Foreground="#FFFF" FontSize="40"/>
                     <TextBlock x:Name="EmailTextBlock" Text="Ваш текст здесь" Foreground="#FFFF" FontSize="40"/>
                 </StackPanel>
+                
             </Grid>
         </StackPanel>
 
         <Image Grid.Column="0" x:Name="ProfileImage" Width="300" Height="300" Margin="10,10,10,10" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
 
-        <StackPanel Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,0,10" Orientation="Horizontal">
+        <StackPanel Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,100" Orientation="Horizontal" >
             <Button Background="White" Width="130" Height="40" Content="Изменить пароль" FontSize="15" Click="ChangePasswordButton_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
