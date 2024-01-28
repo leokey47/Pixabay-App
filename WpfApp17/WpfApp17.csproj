@@ -210,6 +210,9 @@
     <Resource Include="Images\red_heart.png" />
     <Resource Include="Images\download.png" />
     <Resource Include="Images\view1.png" />
+    <Resource Include="Images\pixabay_logo.png" />
+    <Resource Include="Images\pixabay_logo.ico" />
+    <Resource Include="Images\camera.png" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>

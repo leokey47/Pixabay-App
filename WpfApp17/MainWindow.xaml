@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp17"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="1720" Background="#202020">
+        Title="Pixabay" Height="900" Width="1720" Background="#202020"
+        Icon="/WpfApp17;component/Images/camera.png">
+    
     <Grid>
         <Image Source="Images/pixabay_ww.png" Width="200" Height="200" />
         <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />

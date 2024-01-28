@@ -53,10 +53,14 @@
             <!-- Second column for text and buttons -->
         </Grid.ColumnDefinitions>
         <!-- Ваш текущий код остается неизменным -->
+        
         <Image x:Name="PhotoImage" Width="800" Height="600" Margin="0,0,0,20" HorizontalAlignment="Left"/>
         <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40 0 0 0">
             <!-- Image icons next to text information -->
+            <Image Source="/Images/pixabay_ww.png" Width="300" Height="100" Margin="0,90,0,0" VerticalAlignment="Top"/>
+            <TextBlock FontSize="20" FontWeight="Light" Text="About Photo"  Margin="0 -45 0 0" Foreground="#808080" TextAlignment="Center"/>
             <StackPanel Orientation="Horizontal">
+
                 <Image Source="/Images/View1.png" Width="20" Height="20" Margin="0,0,5,0"/>
                 <TextBlock x:Name="ViewsTextBlock" FontSize="24" Foreground="#707070"/>
             </StackPanel>
@@ -73,10 +77,10 @@
 
             <!-- Buttons centered below the text information -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0">
-                <Button Style="{StaticResource MyButtonStyle}" Content="Назад" Click="BackButton_Click" />
-                <Button Style="{StaticResource MyButtonStyle}" Content="User profile" Click="WebUser_Click" />
-                <Button Style="{StaticResource MyButtonStyle}" Content="Скачать" Click="DownloadButton_Click"/>
                 <Button Style="{StaticResource MyFavoriteButtonStyle}" Content="В избранное" Click="AddToFavoriteButton_Click"/>
+                <Button Style="{StaticResource MyButtonStyle}" Content="Скачать" Click="DownloadButton_Click"/>
+                
+                <Button Style="{StaticResource MyButtonStyle}" Content="Назад" Click="BackButton_Click" />
             </StackPanel>
         </StackPanel>
     </Grid>
