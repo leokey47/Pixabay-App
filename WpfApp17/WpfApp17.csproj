@@ -216,6 +216,7 @@
     <Resource Include="Images\exit.png" />
     <Resource Include="Images\back.png" />
     <Resource Include="Images\user11.png" />
+    <Resource Include="Images\red_heart_white.png" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>

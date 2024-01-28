@@ -93,11 +93,11 @@ namespace WpfApp17.View
                         currentUser = user;
                     }
 
-                    MessageBox.Show("Password changed successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Пароль успешно изменен.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
-                    MessageBox.Show("Invalid old password or new password does not meet the requirements.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Неверный старый пароль или новый пароль не соответствует требованиям", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

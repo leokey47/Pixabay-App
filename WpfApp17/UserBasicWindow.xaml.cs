@@ -46,7 +46,7 @@ namespace WpfApp17
                 {
                     using (var client = new HttpClient())
                     {
-                        string queryString = $"{BASEURL}?key={APIKEY}&q={searchQuery}&per_page=50&image_type=photo";
+                        string queryString = $"{BASEURL}?key={APIKEY}&q={searchQuery}&per_page=75&image_type=photo";
 
                         if (!string.IsNullOrEmpty(x) && x.ToLower() != "all")
                         {
