@@ -19,6 +19,7 @@ namespace WpfApp17.View
         private USERS currentUser;
         private ListView imageListView;
 
+
         public PhotoPage(USERS currentUser, string imageUrl, string title, string author, int views, int likes, int downloads, ListView imageListView)
         {
             InitializeComponent();
@@ -26,8 +27,8 @@ namespace WpfApp17.View
             this.imageListView = imageListView;
 
             PhotoImage.Source = new BitmapImage(new Uri(imageUrl));
-            TitleTextBlock.Text = title;
-            AuthorTextBlock.Text = author;
+            //TitleTextBlock.Text = title;
+            //AuthorTextBlock.Text = author;
             ViewsTextBlock.Text = $"Просмотры: {views}";
             LikesTextBlock.Text = $"Лайки: {likes}";
             DownloadsTextBlock.Text = $"Скачивания: {downloads}";
