@@ -213,6 +213,9 @@
     <Resource Include="Images\pixabay_logo.png" />
     <Resource Include="Images\pixabay_logo.ico" />
     <Resource Include="Images\camera.png" />
+    <Resource Include="Images\exit.png" />
+    <Resource Include="Images\back.png" />
+    <Resource Include="Images\user11.png" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>

@@ -98,7 +98,7 @@
                                         <ControlTemplate TargetType="Button">
                                             <Grid>
                                                 <Ellipse Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Fill="Transparent"/>
-                                                <Image Source="/Images/usericon.png" Width="20" Height="20"/>
+                                                <Image Source="/Images/user11.png" Width="40" Height="40"/>
                                             </Grid>
                                         </ControlTemplate>
                                     </Setter.Value>
