@@ -20,5 +20,6 @@ namespace WpfApp17
         public bool IsFavorite { get; set; }
         public int ImageId { get; set; }
         public int Id { get; set; }
+        public BitmapImage ImageSource { get; set; }
     }
 }

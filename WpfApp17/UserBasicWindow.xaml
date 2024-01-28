@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="1024" d:DesignWidth="1720" Background="#202020" 
       Title="UserBasicWindow">
-    
+
 
     <Grid>
         <Grid.RowDefinitions>
@@ -18,8 +18,8 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
             <TextBlock x:Name="UserNameTextBlock" FontWeight="Bold" Foreground="DarkGreen"/>
         </StackPanel>
-        
-        
+
+
 
         <ScrollViewer Grid.Row="1">
             <StackPanel>
@@ -86,7 +86,7 @@
                     </ComboBox>
 
                     <ComboBox x:Name="OrderComboBox" Width="100" Height="25" Margin="10,0,10,0" SelectionChanged="ComboBox_SelectionChanged" >
-                        
+
                         <ComboBoxItem>popular</ComboBoxItem>
                         <ComboBoxItem>latest</ComboBoxItem>
                     </ComboBox>
@@ -121,7 +121,7 @@
                     </ListView.ItemsPanel>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding WebformatURL}" Width="200" Height="200" />
+                            <Image Width="200" Height="200" Source="{Binding ImageSource}" />
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
