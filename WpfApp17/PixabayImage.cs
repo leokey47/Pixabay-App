@@ -11,8 +11,13 @@ namespace WpfApp17
     public class PixabayImage
     {
         public string WebformatURL { get; set; }
+        public string PreviewURL { get; set; }
+        public string LargeImageURL { get; set; }
+        
         public string Title { get; set; }
-        public string Author { get; set; }
+        public string User { get; set; }
+        public string User_Id { get; set; }
+        
         public int Views { get; set; }
         public int Downloads { get; set; }
         public int Likes { get; set; }

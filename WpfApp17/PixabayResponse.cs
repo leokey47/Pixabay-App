@@ -9,5 +9,7 @@ namespace WpfApp17
     public class PixabayResponse 
     {
         public List<PixabayImage> Hits { get; set; }
+         // где pixabayResponse - ваш экземпляр PixabayResponse с коллекцией Hits
+
     }
 }

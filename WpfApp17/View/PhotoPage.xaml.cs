@@ -20,7 +20,7 @@ namespace WpfApp17.View
         private ListView imageListView;
 
 
-        public PhotoPage(USERS currentUser, string imageUrl, string title, string author, int views, int likes, int downloads, ListView imageListView)
+        public PhotoPage(USERS currentUser, string imageUrl, string title, string user,string user_id, int views, int likes, int downloads, ListView imageListView)
         {
             InitializeComponent();
             this.currentUser = currentUser;
@@ -28,7 +28,8 @@ namespace WpfApp17.View
 
             PhotoImage.Source = new BitmapImage(new Uri(imageUrl));
             //TitleTextBlock.Text = title;
-            //AuthorTextBlock.Text = author;
+            AuthorTextBlock.Text = user;
+            UserIdTextBlock.Text = user_id;
             ViewsTextBlock.Text = $"Просмотры: {views}";
             LikesTextBlock.Text = $"Лайки: {likes}";
             DownloadsTextBlock.Text = $"Скачивания: {downloads}";
@@ -52,7 +53,7 @@ namespace WpfApp17.View
                 {
                     try
                     {
-                        BitmapImage image = new BitmapImage(new Uri(selectedImage.WebformatURL));
+                        BitmapImage image = new BitmapImage(new Uri(selectedImage.LargeImageURL));
                         BitmapEncoder encoder = new PngBitmapEncoder();
                         encoder.Frames.Add(BitmapFrame.Create(image));
 
@@ -133,7 +134,14 @@ namespace WpfApp17.View
 
         private void WebUser_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new WebUser());
+            PixabayImage selectedImage = (PixabayImage)imageListView.SelectedItem;
+
+            if (selectedImage != null)
+            {
+                // Передайте user_id и user при создании WebUser
+                NavigationService.Navigate(new WebUser(currentUser, selectedImage.User_Id, selectedImage.User));
+            }
         }
+
     }
 }

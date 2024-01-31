@@ -46,7 +46,7 @@ namespace WpfApp17
                 {
                     using (var client = new HttpClient())
                     {
-                        string queryString = $"{BASEURL}?key={APIKEY}&q={searchQuery}&per_page=75&image_type=photo";
+                        string queryString = $"{BASEURL}?key={APIKEY}&q={searchQuery}&per_page=200&image_type=photo";
 
                         if (!string.IsNullOrEmpty(x) && x.ToLower() != "all")
                         {
@@ -80,11 +80,16 @@ namespace WpfApp17
                         var response = await client.GetStringAsync(queryString);
                         var pixabayResponse = JsonConvert.DeserializeObject<PixabayResponse>(response);
 
+                        // Сохранение JSON в файл
+                        string jsonFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pixabayResponse.json");
+                        File.WriteAllText(jsonFilePath, JsonConvert.SerializeObject(pixabayResponse));
+
                         ImageListView.ItemsSource = pixabayResponse.Hits;
                         currentUserSettings.LastSearchQuery = searchQuery;
                         SaveUserSettings();
 
                         await LoadImagesToUI(pixabayResponse.Hits);
+
                     }
                 }
                 catch (Exception ex)
@@ -197,7 +202,7 @@ namespace WpfApp17
             {
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
-                bitmapImage.UriSource = new Uri(image.WebformatURL, UriKind.Absolute);
+                bitmapImage.UriSource = new Uri(image.PreviewURL, UriKind.Absolute);
                 bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
                 bitmapImage.EndInit();
 
@@ -241,9 +246,10 @@ namespace WpfApp17
             {
                 NavigationService.Navigate(new PhotoPage(
                     currentUser,
-                    selectedImage.WebformatURL,
+                    selectedImage.LargeImageURL,
                     selectedImage.Title,
-                    selectedImage.Author,
+                    selectedImage.User,
+                    selectedImage.User_Id,
                     selectedImage.Views,
                     selectedImage.Likes,
                     selectedImage.Downloads,
